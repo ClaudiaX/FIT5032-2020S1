@@ -40,10 +40,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Image)
-
-
-            @*<img src="~/Content/Image/Event/" alt="@model.Name" style="width:300px;" />*@
+            @*@Html.DisplayFor(model => model.Image)*@
+            <img src="~/Content/Image/Event/@Html.DisplayFor(model => model.Image)" alt="@Html.DisplayFor(model => model.Image)" style="width:300px;" />
         </dd>
 
     </dl>
