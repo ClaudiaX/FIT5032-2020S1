@@ -1,31 +1,55 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+@*<div class="jumbotron home-header">*@
+<div class="home-header">
+    <h1>Un Peu Café</h1>
+    <h2>Experience love at first sip</h2>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <div class="thumbnail">
+            <img src="~/Content/Image/Home/UnPeu.jpg" alt="About">
+            <div class="caption">
+                <h2>Un Peu Café</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mollis sollicitudin nibh, in
+                    eleifend nulla tempor id. Etiam pulvinar odio sit amet aliquet fringilla. Integer eget dui id sapien
+                    efficitur ultrices ac quis ante. Quisque vulputate pulvinar metus, id vehicula mi facilisis ut.
+                </p>
+                <p><a href="/Home/About" class="btn btn-default">Learn more &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="~/Content/Image/Home/Store.jpg" alt="Store">
+            <div class="caption">
+                <h2>Find a Store</h2>
+                <p>
+                    Duis a odio urna. Duis id massa egestas, mattis sapien quis, fermentum est. Suspendisse lobortis
+                    lectus vel orci blandit eleifend. Proin at quam vitae quam feugiat placerat ac feugiat dolor.
+                    Mauris in nulla est. Mauris quis arcu non justo euismod volutpat Mauris cursus erat.
+                </p>
+                <p><a href="/Branches/Index" class="btn btn-default">Find Us &raquo;</a></p>
+            </div>
+        </div>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <div class="thumbnail">
+            <img src="~/Content/Image/Home/Events.jpg" alt="Events">
+            <div class="caption">
+                <h2>Events</h2>
+                <p>
+                    Pellentesque porta auctor luctus. Mauris in ornare dui. Sed vel commodo urna. Nunc bibendum 
+                    tincidunt nibh ut euismod. Aenean semper sem rutrum ipsum rhoncus, vel consectetur ligula volutpat.
+                    Ut nunc purus, venenatis non dui a, fringilla euismod arcu.
+                </p>
+                <p><a href="/BranchEvents/Index" class="btn btn-default">Book Now &raquo;</a></p>
+            </div>
+        </div>
     </div>
 </div>

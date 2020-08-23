@@ -229,6 +229,11 @@
     <Content Include="Content\Image\Event\CoffeeExploring.jpg" />
     <Content Include="Content\Image\Event\CoffeeRoasting.jpg" />
     <Content Include="Content\Image\Event\LatteArt.jpg" />
+    <Content Include="Content\Image\Home\background.jpg" />
+    <Content Include="Content\Image\Home\Events.jpg" />
+    <Content Include="Content\Image\Home\logo.jpg" />
+    <Content Include="Content\Image\Home\Store.jpg" />
+    <Content Include="Content\Image\Home\UnPeu.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
