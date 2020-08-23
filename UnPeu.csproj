@@ -168,22 +168,67 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BranchesController.cs" />
+    <Compile Include="Controllers\BranchEventsController.cs" />
+    <Compile Include="Controllers\EventTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008230940286_InitialCreate.cs" />
+    <Compile Include="Migrations\202008230940286_InitialCreate.Designer.cs">
+      <DependentUpon>202008230940286_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008230953412_BranchModel.cs" />
+    <Compile Include="Migrations\202008230953412_BranchModel.Designer.cs">
+      <DependentUpon>202008230953412_BranchModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008231006016_JobModel.cs" />
+    <Compile Include="Migrations\202008231006016_JobModel.Designer.cs">
+      <DependentUpon>202008231006016_JobModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008231017389_EventTypeModel.cs" />
+    <Compile Include="Migrations\202008231017389_EventTypeModel.Designer.cs">
+      <DependentUpon>202008231017389_EventTypeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008231024283_BranchEventModel.cs" />
+    <Compile Include="Migrations\202008231024283_BranchEventModel.Designer.cs">
+      <DependentUpon>202008231024283_BranchEventModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008231025542_BranchEventModelChange.cs" />
+    <Compile Include="Migrations\202008231025542_BranchEventModelChange.Designer.cs">
+      <DependentUpon>202008231025542_BranchEventModelChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008231035148_RemoveBranchEvents.cs" />
+    <Compile Include="Migrations\202008231035148_RemoveBranchEvents.Designer.cs">
+      <DependentUpon>202008231035148_RemoveBranchEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008231036000_ReAddBranchEvents.cs" />
+    <Compile Include="Migrations\202008231036000_ReAddBranchEvents.Designer.cs">
+      <DependentUpon>202008231036000_ReAddBranchEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\BranchEvent.cs" />
+    <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\Event\BaristaCourse.jpg" />
+    <Content Include="Content\Image\Event\CoffeeExploring.jpg" />
+    <Content Include="Content\Image\Event\CoffeeRoasting.jpg" />
+    <Content Include="Content\Image\Event\LatteArt.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -235,6 +280,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Branches\Create.cshtml" />
+    <Content Include="Views\Branches\Delete.cshtml" />
+    <Content Include="Views\Branches\Details.cshtml" />
+    <Content Include="Views\Branches\Edit.cshtml" />
+    <Content Include="Views\Branches\Index.cshtml" />
+    <Content Include="Views\EventTypes\Create.cshtml" />
+    <Content Include="Views\EventTypes\Delete.cshtml" />
+    <Content Include="Views\EventTypes\Details.cshtml" />
+    <Content Include="Views\EventTypes\Edit.cshtml" />
+    <Content Include="Views\EventTypes\Index.cshtml" />
+    <Content Include="Views\BranchEvents\Create.cshtml" />
+    <Content Include="Views\BranchEvents\Delete.cshtml" />
+    <Content Include="Views\BranchEvents\Details.cshtml" />
+    <Content Include="Views\BranchEvents\Edit.cshtml" />
+    <Content Include="Views\BranchEvents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -251,6 +311,32 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202008230940286_InitialCreate.resx">
+      <DependentUpon>202008230940286_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008230953412_BranchModel.resx">
+      <DependentUpon>202008230953412_BranchModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008231006016_JobModel.resx">
+      <DependentUpon>202008231006016_JobModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008231017389_EventTypeModel.resx">
+      <DependentUpon>202008231017389_EventTypeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008231024283_BranchEventModel.resx">
+      <DependentUpon>202008231024283_BranchEventModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008231025542_BranchEventModelChange.resx">
+      <DependentUpon>202008231025542_BranchEventModelChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008231035148_RemoveBranchEvents.resx">
+      <DependentUpon>202008231035148_RemoveBranchEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008231036000_ReAddBranchEvents.resx">
+      <DependentUpon>202008231036000_ReAddBranchEvents.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

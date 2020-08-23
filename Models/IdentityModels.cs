@@ -20,6 +20,14 @@ namespace UnPeu.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Branch> Branches { get; set; }
+
+        public DbSet<Job> Jobs { get; set; }
+
+        public DbSet<EventType> EventTypes { get; set; }
+
+        public DbSet<BranchEvent> BranchEvents { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
