@@ -112,7 +112,7 @@ namespace UnPeu.Controllers
             Branch branch = db.Branches.Find(id);
             db.Branches.Remove(branch);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
 
         protected override void Dispose(bool disposing)
