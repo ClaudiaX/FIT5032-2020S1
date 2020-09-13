@@ -23,7 +23,7 @@ namespace UnPeu.Controllers
             }
             else
             {
-                return View("CustomerIndex",db.Branches.ToList());
+                return View("CustomerIndex", db.Branches.ToList());
             }
 
         }
@@ -122,6 +122,16 @@ namespace UnPeu.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
+
+
+        public JsonResult GetBranches()
+        {
+            var branches = db.Branches.ToList();
+            return new JsonResult { Data = branches, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+        }
+        // Json: javascript object notation
+
 
         protected override void Dispose(bool disposing)
         {
