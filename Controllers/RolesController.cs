@@ -12,10 +12,18 @@ namespace UnPeu.Controllers
     {
         private ApplicationDbContext context = new ApplicationDbContext();
 
+      //  [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            var roles = context.Roles.ToList();
-            return View(roles);
+            if (User.IsInRole("Admin"))
+            {
+                var roles = context.Roles.ToList();
+                return View(roles);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         // GET

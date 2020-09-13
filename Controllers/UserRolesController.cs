@@ -65,5 +65,27 @@ namespace UnPeu.Controllers
             ViewBag.RolesForUser = this.UserManager.GetRoles(user.Id);
             return View();
         }
+
+        [HttpGet]
+        public ActionResult DeleteUserRole()
+        {
+            var roles = context.Roles.OrderBy(r => r.Name).ToList().Select(r => new SelectListItem { Value = r.Name.ToString(), Text = r.Name }).ToList();
+            ViewBag.Roles = roles;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUserRole(string UserName, string RoleName)
+        {
+
+            ApplicationUser user = context.Users.Where(u => u.Email.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+
+            if (this.UserManager.IsInRole(user.Id, RoleName))
+            {
+                this.UserManager.RemoveFromRole(user.Id, RoleName);
+            }
+            return View("Index");
+
+        }
     }
 }

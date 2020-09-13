@@ -17,7 +17,15 @@ namespace UnPeu.Controllers
         // GET: Branches
         public ActionResult Index()
         {
-            return View(db.Branches.ToList());
+            if (User.IsInRole("Admin"))
+            {
+                return View(db.Branches.ToList());
+            }
+            else
+            {
+                return View("CustomerIndex",db.Branches.ToList());
+            }
+
         }
 
         // GET: Branches/Details/5
@@ -112,7 +120,7 @@ namespace UnPeu.Controllers
             Branch branch = db.Branches.Find(id);
             db.Branches.Remove(branch);
             db.SaveChanges();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

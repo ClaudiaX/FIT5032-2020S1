@@ -54,15 +54,15 @@ namespace UnPeu
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "3673841559303570",
+               appSecret: "0360464446dcfd9ce4c03b322f2194a9");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "158809824627-09k4tq1ig8heolj4t65u2n5cgf0v9uup.apps.googleusercontent.com",
+                ClientSecret = "iHMZIOwWszJ3UjKirnXv20nT"
+            });
         }
     }
 }

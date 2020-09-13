@@ -312,6 +312,8 @@
     <Content Include="Views\UserRoles\AddRoleToUser.cshtml" />
     <Content Include="Views\UserRoles\GetUserRoles.cshtml" />
     <Content Include="Views\UserRoles\Index.cshtml" />
+    <Content Include="Views\UserRoles\DeleteUserRole.cshtml" />
+    <Content Include="Views\Branches\CustomerIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
