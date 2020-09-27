@@ -6,17 +6,85 @@
 }
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhULWnC3oDFEtMkSv5FA3djNFo2Ke7SV4&callback=initMap" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=yourkey&callback=initMap&&libraries=places&v=weekly" defer></script>
 
 <style>
     #map {
         height: 500px;
+    }
+
+    #floating-panel {
+        position: absolute;
+        top: 100px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+    }
+
+    #right-panel {
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+        max-height: 500px;
+    }
+
+        #right-panel select,
+        #right-panel input {
+            font-size: 15px;
+        }
+
+        #right-panel select {
+            width: 100%;
+        }
+
+        #right-panel i {
+            font-size: 12px;
+        }
+
+    #right-panel {
+        height: 100%;
+        float: right;
+        width: 390px;
+        overflow: auto;
     }
 </style>
 
 
 <h2>Index</h2>
 
+<div id="floating-panel">
+    <div>
+        <label for="start"><b>Start: </b></label>
+        <input id="start" type="text" placeholder="Enter a location" />
+    </div>
+    <div>
+        <label for="end"><b>End: </b></label>
+        <select id="end">
+            @foreach (var item in Model)
+            {
+                <option value="@item.Address">@item.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label for="mode"> <b>Mode of Travel: </b></label>
+        <select id="mode">
+            <option value="DRIVING">Driving</option>
+            <option value="WALKING">Walking</option>
+            <option value="BICYCLING">Bicycling</option>
+            <option value="TRANSIT">Transit</option>
+        </select>
+    </div>
+    <button id="get-direction">Get Direction</button>
+</div>
+
+<div id="right-panel"></div>
 <div id="map"></div>
 
 <table class="table">
@@ -38,6 +106,13 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
+
+                @*raw*@
+                @*@Html.Raw(item.Address)*@
+
+                @*encode*@
+                @*@HtmlEncoder.Default.Encode(item.Address)
+                @UrlEncoder.Default.Encoder(item.Address)*@
             </td>
             <td>
 

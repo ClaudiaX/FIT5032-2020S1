@@ -32,13 +32,28 @@ function initMap() {
         handleLocationError(false, infoWindow, map.getCenter());
     }
 
-
     // mark branches
     var geocoder = new google.maps.Geocoder();
     for (var i = 0; i < branches.length; i++) {
         console.log(branches[i]);
         geodoceAddress(geocoder, map, branches[i]);
     }
+
+    // auto complete
+
+    const input = document.getElementById("start");
+    autoComplete(input, map);
+
+    // get direction
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setPanel(document.getElementById("right-panel"));
+    directionsRenderer.setMap(map);
+    var getDirection = document.getElementById("get-direction");
+    getDirection.addEventListener("click", function () {
+        calculateAndDisplayRoute(directionsService, directionsRenderer);
+    });
+
 
 }
 
@@ -63,7 +78,8 @@ function geodoceAddress(geocoder, map, branch) {
         if (status === "OK") {
             var marker = new google.maps.Marker({
                 map: map,
-                position: results[0].geometry.location
+                position: results[0].geometry.location,
+                icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
             });
 
             marker.addListener("click", function () {
@@ -73,3 +89,35 @@ function geodoceAddress(geocoder, map, branch) {
     })
 
 }
+
+function autoComplete(input, map) {
+    const autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.setTypes(["address"]);
+    autocomplete.bindTo("bounds", map);
+
+}
+
+function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+    var mode = document.getElementById("mode");
+    directionsService.route(
+        {
+            origin: {
+                query: document.getElementById("start").value,
+            },
+            destination: {
+                query: document.getElementById("end").value,
+            },
+            travelMode: google.maps.TravelMode[mode.value],
+        },
+        (response, status) => {
+            if (status === "OK") {
+                directionsRenderer.setDirections(response);
+            } else {
+                window.alert("Directions request failed due to " + status);
+            }
+        }
+    );
+}
+
+
+

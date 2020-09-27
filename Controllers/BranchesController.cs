@@ -10,6 +10,7 @@ using UnPeu.Models;
 
 namespace UnPeu.Controllers
 {
+    [Authorize]
     public class BranchesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
