@@ -124,6 +124,22 @@ namespace UnPeu.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET BranchEvents/EventsByBranch/id
+        public ActionResult EventsByBranch(int id)
+        {
+            // id: branchId
+            ViewBag.branch = db.Branches.FirstOrDefault(b => b.Id == id);
+            var branchEvents = db.BranchEvents.Include(be => be.Branch).Include(be => be.EventType).Where(be => be.BranchId == id).ToList();
+            return View(branchEvents);
+        }
+
+        // GET BranchEvents/GetEventsByBranch/id
+        public JsonResult GetEventsByBranch(int id)
+        {
+            var branchEvents = db.BranchEvents.Include(be => be.Branch).Include(be => be.EventType).Where(be => be.BranchId == id).ToList();
+            return new JsonResult { Data = branchEvents, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

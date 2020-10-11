@@ -28,6 +28,8 @@ namespace UnPeu.Models
 
         public DbSet<BranchEvent> BranchEvents { get; set; }
 
+        public DbSet<BookEvent> BookEvents { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
