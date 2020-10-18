@@ -30,11 +30,17 @@ namespace UnPeu
                         "~/Scripts/moment.min.js",
                         "~/Scripts/fullcalendar.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
+                        //"~/Scripts/moment.min.js",
+                        "~/Scripts/bootstrap-datetimepicker.js"
+                        ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/DataTables/css/datatables.bootstrap.css",
-                      "~/Content/fullcalendar.css"));
+                      "~/Content/fullcalendar.css",
+                      "~/Content/bootstrap-datetimepicker.css"));
         }
     }
 }

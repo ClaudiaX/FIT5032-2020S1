@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UnPeu.Models;
+using UnPeu.Utils;
 
 namespace UnPeu.Controllers
 {
@@ -22,17 +23,26 @@ namespace UnPeu.Controllers
         {
             // id = branch Event Id
             //var user = db.Users.Find(User.Identity.GetUserId());
-            //var branchEvent = db.BranchEvents.Where(be => be.Id == id).FirstOrDefault();
+            var branchEvent = db.BranchEvents.Where(be => be.Id == id).FirstOrDefault();
             //var bookEvent = new BookEvent {ApplicationUser = user,BranchEvent = BranchEvent, }
-            var check = db.BookEvents.Where(be => be.BranchEventId == id && be.ApplicationUserId == User.Identity.GetUserId()).FirstOrDefault();
+            var userId = User.Identity.GetUserId();
+            var check = db.BookEvents.Where(be => be.BranchEventId == id && be.ApplicationUserId.Equals(userId)).FirstOrDefault();
 
-            var book = db.BookEvents.Include()
-
-            if(check == null)
+            if (check == null)
             {
+
                 var bookEvent = new BookEvent { ApplicationUserId = User.Identity.GetUserId(), BranchEventId = id };
                 db.BookEvents.Add(bookEvent);
                 db.SaveChanges();
+
+
+                string toEmail = User.Identity.GetUserName();
+                string subject = "Book Event Confirm";
+                string content = "This is the content of test email. Start time: " + branchEvent.StartTime.ToString();
+
+
+                EmailSender es = new EmailSender();
+                es.SendSingle(toEmail, subject, content);
                 // send email
             }
             else

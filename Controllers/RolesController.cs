@@ -34,6 +34,7 @@ namespace UnPeu.Controllers
 
         //POST
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(FormCollection collection)
         {
             try

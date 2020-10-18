@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UnPeu.Models;
+using UnPeu.Utils;
 
 namespace UnPeu.Controllers
 {
@@ -89,6 +90,20 @@ namespace UnPeu.Controllers
         {
             if (ModelState.IsValid)
             {
+                var bookevents = db.BookEvents.Include(be => be.ApplicationUser).Where(be => be.BranchEvent.Id == branchEvent.Id).ToList();
+                List<string> emailAdd = new List<string>();
+                for (int i = 0; i < bookevents.Count; i++)
+                {
+                    emailAdd.Add(bookevents[i].ApplicationUser.Email);
+                    System.Diagnostics.Debug.Write(bookevents[i].ApplicationUser.Email);
+                }
+
+                string subject = "Change of event";
+                string content = "Event change";
+
+                EmailSender es = new EmailSender();
+                es.SendMultiple(emailAdd, subject, content);
+
                 db.Entry(branchEvent).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
