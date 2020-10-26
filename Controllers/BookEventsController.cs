@@ -53,5 +53,37 @@ namespace UnPeu.Controllers
 
             return View("index");
         }
+
+
+
+        public JsonResult Analysis()
+        {
+            var bookEvents = db.BookEvents.Include("BranchEvent").Include("BranchEvent.Branch").Include("BranchEvent.EventType").ToList();
+
+            // eventType     count()
+
+            var bookPerEvent =
+                from bookEvent in bookEvents
+                group bookEvent by bookEvent.BranchEvent.EventType into bookGroup
+
+                select new
+                {
+                    Event = bookGroup.Key,
+                    Count = bookGroup.Count()
+                };
+
+            var bookPerBranchEvent =
+                from bookEvent in bookEvents
+                group bookEvent by new { bookEvent.BranchEvent.Branch, bookEvent.BranchEvent.EventType } into bookGroup
+                select new
+                {
+                    Book = bookGroup.Key,
+                    Count = bookGroup.Count()
+                };
+
+            //return new JsonResult { Data = bookPerEvent, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            return new JsonResult { Data = bookPerBranchEvent, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
     }
 }

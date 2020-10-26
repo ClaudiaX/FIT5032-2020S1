@@ -5,7 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" />
+
+
 <h2>Index</h2>
+
+<canvas id="myChart" width="400" height="200"></canvas>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -27,29 +32,118 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Color)*@
-            <div style="color:@item.Color;">@item.Color</div>
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Image)*@
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Color)*@
+                <div style="color:@item.Color;">@item.Color</div>
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Image)*@
 
-            <img src="~/Content/Image/Event/@item.Image" alt="@item.Name" style="width:200px;"/>
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+                <img src="~/Content/Image/Event/@item.Image" alt="@item.Name" style="width:200px;" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
+    <script>
+        var ctx = document.getElementById('myChart');
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://localhost:44357/BookEvents/Analysis", false);
+        xhr.send();
+        var results = JSON.parse(xhr.responseText);
+
+        console.log(results);
+
+        var labels = []; // x, event name
+        var data = []; // y, count()
+
+        for (var i = 0; i < results.length; i++) {
+            labels.push(results[i].Event.Name);
+            data.push(results[i].Count);
+        }
+
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["a", "b", "c", "d"], // x event type
+                datasets: [{
+                    label: "line-1",// one branch, count () for each eventType
+                    data: [10, 20, 30, 20],
+                    fill: false,
+                }, {
+                    label: "line-2",
+                    data: [1, 5, 8, 9],
+                    fill: false,
+                }, {
+                    label: "line-3",
+                    data: [2, 6, 5, 4],
+                    fill: false,
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+                                            //var myChart = new Chart(ctx, {
+                                            //    type: 'bar',
+                                            //    data: {
+                                            //        labels: labels,
+                                            //        datasets: [{
+                                            //            label: 'Bok Per Event',
+                                            //            data: data,
+                                            //            backgroundColor: ["rgba(255,0,0,0.1)", "rgba(0,255,0,0.1)", "rgba(0,0,255,0.1)", "rgba(0,0,0,0.1)"],
+                                            //            hoverBackgroundColor: ["rgba(255,0,0,0.3)", "rgba(0,255,0,0.3)", "rgba(0,0,255,0.3)", "rgba(0,0,0,0.3)"],
+                                            //            borderColor: ["rgba(255,0,0,0.5)", "rgba(0,255,0,0.5)", "rgba(0,0,255,0.5)", "rgba(0,0,0,0.5)"],
+                                            //            hoverBorderColor: ["rgba(255,0,0,0.7)", "rgba(0,255,0,0.7)", "rgba(0,0,255,0.7)", "rgba(0,0,0,0.7)"],
+                                            //            borderWidth: 1,
+                                            //        }]
+                                            //    },
+                                            //    options: {
+                                            //        title: {
+                                            //            display: true,
+                                            //            text: "Book Per Event",
+                                            //            fontSize: 18,
+                                            //        },
+                                            //        legend: {
+                                            //            labels: {
+                                            //                display: false,
+                                            //            }
+                                            //        },
+                                            //            scales: {
+                                            //            yAxes: [{
+                                            //                ticks: {
+                                            //                    beginAtZero: true
+                                            //                }
+                                            //            }]
+                                            //        }
+                                            //    }
+                                            //});
+    </script>
+
+}
